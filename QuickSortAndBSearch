@@ -1,0 +1,46 @@
+/**
+ * Created by Ashutosh on 8/2/2017.
+ */
+
+public class QuickSortAndBSearch {
+    public static void main(String[] args) {
+        int[] arr = {10, 5, 25, 14, 38, 32};
+        quickSort(arr, 0, arr.length - 1);
+
+        for (int i = 0; i < arr.length; i++) System.out.print(arr[i] + " ");
+        System.out.println("\npos: " +binarySearch(arr, 0, arr.length - 1, 25));
+    }
+
+    private static void quickSort(int[] arr, int l, int r) {
+        int lo = l;
+        int hi = r;
+        int pi = arr[l + (r - l) / 2];
+
+        while (l < r) {
+            while (arr[l] < pi) l++;
+            while (arr[r] > pi) r--;
+            if (l <= r) {
+                int temp = arr[l];
+                arr[l] = arr[r];
+                arr[r] = temp;
+                l++;
+                r--;
+            }
+        }
+
+        if (lo < r) quickSort(arr, lo, r);
+        if (hi > l) quickSort(arr, l, hi);
+    }
+
+
+    private static int binarySearch(int[] arr, int l, int r, int x) {
+        if (r >= l) {
+            int mid = l + (r - l) / 2;
+            if (x == arr[mid]) return mid;
+            if (x < arr[mid]) return binarySearch(arr,l,mid-1,x);
+            return binarySearch(arr,mid+1,r,x);
+        }
+        return -1;
+    }
+}
+
